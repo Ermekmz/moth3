@@ -36,4 +36,4 @@ async def quiz_3(call: types.CallbackQuery):
 
 def register_callbek_hansdlers(dp:Dispatcher):
     dp.register_callback_query_handler(quiz_2,text='button')
-    dp.register_callback_query_handler(quiz_3,text='button2')
+    dp.register_callback_query_handler(quiz_3,text='button')

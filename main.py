@@ -2,11 +2,12 @@
 from aiogram.utils import executor
 import logging
 from config import dp
-from handlers import callbek, klient,extra,admin
+from handlers import callbek, klient,extra,admin, fsm_admin
 
 klient.register_handlers_klient(dp)
 callbek.register_callbek_hansdlers(dp)
 admin.register_handlers_admin(dp)
+fsm_admin.register_handlers_fsm(dp)
 extra.register_handlers_extra(dp)
 
 
