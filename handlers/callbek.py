@@ -1,4 +1,4 @@
-from config import dp,bot
+from config import bot
 from aiogram import types, Dispatcher
 from keibort import klient_kb
 

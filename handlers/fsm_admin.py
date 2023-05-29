@@ -6,6 +6,8 @@ from aiogram.dispatcher.filters.state import State,StatesGroup
 from config import bot, ADMIN
 from keibort import klient_kb
 import uuid
+from db_bot.db_bot import sql_command_insert
+
 
 print(uuid.uuid1())
 gen_id=uuid.uuid1()
@@ -24,6 +26,8 @@ async def fsm_start(message : types.Message):
         if message.from_user.id not in ADMIN:
             await message.answer('ты не достоин!')
         else:
+            global gen_id
+            gen_id = uuid.uuid1()
             await message.answer(f'{gen_id}')
             await FSMadmin.name.set()
             await message.answer('КТО ТЫ?!',reply_markup=klient_kb.cancle_markup)
@@ -78,6 +82,7 @@ async def new_photo(message : types.Message,state:FSMContext):
 async def submit(message : types.Message,state:FSMContext):
     if message.text.lower() == 'да':
         await state.finish()
+        await sql_command_insert(state)
         await message.answer('не темик')
     elif message.text.lower == 'нет':
         await state.finish()
