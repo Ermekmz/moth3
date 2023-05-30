@@ -1,8 +1,9 @@
 from aiogram import types, Dispatcher
 
-from config import dp,bot
+from config import bot
 from keibort import klient_kb
-
+from aiogram import types, Dispatcher
+from parcer.super_shiny import parser
 
 
 
@@ -29,3 +30,17 @@ async def quiz (message: types.Message):
 def register_handlers_klient(dp:Dispatcher):
     dp.register_message_handler(photo, commands=['meme'])
     dp.register_message_handler(quiz, commands=['quiz'])
+
+
+async def get_wheels(message: types.Message):
+    wheels = parser()
+    for i in wheels:
+        await message.answer(
+            f"{i['link']}\n\n"
+            f"{i['title']}\n\n"
+            f"{i['price']}\n\n"
+            f"{i['size']}\n\n"
+        )
+
+def register_handlers_client(dp:Dispatcher):
+    dp.register_message_handler(get_wheels, commands=['get'])
